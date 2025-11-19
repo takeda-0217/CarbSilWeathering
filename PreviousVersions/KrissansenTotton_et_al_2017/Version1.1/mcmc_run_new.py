@@ -153,10 +153,13 @@ ndim = 17 ### This is the number of parameters we are solving for (x[0], x[1], .
 ### nwalk * nsteps = total number of model runs
 ### To do a full model run, nwalk = 1000 and nsteps = 10000 is appropriate 
 ### For a quick run, nwalk = 100 and nsteps = 1000 will tell you if the code is working.
-nwalk = 500 
-nsteps = 2000
-#nwalk = 200
-#nsteps = 500
+# nwalk  = 500 
+# nsteps = 2000
+# nwalk = 200
+# nsteps = 500
+### --- quick test run values --- ###
+nwalk  = 50
+nsteps = 500 
 ### Important: if you make nsteps < 1000, you will need to modify some of the plotting stuff below
 ### This is because, ideally, you want to throw out the first 1000 steps, as it takes a while for the Markov
 ### chains to converge on the posteriors. But if you are just doing a quick test run to see if the code works

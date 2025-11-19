@@ -131,7 +131,9 @@ def forward_model(W,F_outgass,n,CO2_dep,Te,mod_sea,alt_frac,Mp_frac,W_plus_1,cl_
     for i in range(0,len(time)):
         
         # Given time evolution of DIC and ALK for ocean and pore space, calculate time evolution for other carbon cycle variables (fluxes and equilibrium chemistry):
-        [Ca,EM_H_o,EM_pH_o,EM_co3_o,EM_hco3_o,EM_co2aq_o,EM_ppCO2_o,EM_Ca_o,EM_H_p,EM_pH_p,EM_co3_p,EM_hco3_p,EM_co2aq_p,EM_ppCO2_p,EM_Ca_p,area,T_surface,T_surface_diff,buffer_T,EM_omega_o,EM_omega_p,Relative_outgassing,weatherability,F_outg,carb_weath,Precip_ocean,Precip_pore,F_diss,F_silic]=Cretaceous_cc([out[i,0],out[i,1],out[i,2],out[i,3]],time[i],cl_sens,deep_grad,PG,change_out,F_outgass,W_plus_1,F_carbw,CWF,CO2_dep,Te,n,coef_for_diss,beta,Ebas)
+        [Ca,EM_H_o,EM_pH_o,EM_co3_o,EM_hco3_o,EM_co2aq_o,EM_ppCO2_o,EM_Ca_o,EM_H_p,EM_pH_p,EM_co3_p,EM_hco3_p,EM_co2aq_p,EM_ppCO2_p,EM_Ca_p,area,T_surface,T_surface_diff,buffer_T,EM_omega_o,EM_omega_p,Relative_outgassing,weatherability,F_outg,carb_weath,Precip_ocean,Precip_pore,F_diss,F_silic] = \
+            Cretaceous_cc([out[i,0],out[i,1],out[i,2],out[i,3]],time[i],cl_sens,deep_grad,PG,change_out,F_outgass,W_plus_1,F_carbw,CWF,CO2_dep,Te,n,coef_for_diss,beta,Ebas)
+        
         array_of_outputs=[EM_pH_o,EM_co3_o,EM_hco3_o, EM_co2aq_o,EM_ppCO2_o,EM_Ca_o,EM_omega_o,T_surface,buffer_T,F_diss,F_silic,Precip_ocean,Precip_pore,EM_omega_p,carb_weath,EM_co3_p,EM_hco3_p, EM_co2aq_p,EM_pH_p,EM_Ca_p, EM_co2aq_p]
         
         # Fill output array with appropriate model outputs:
@@ -188,7 +190,8 @@ def system_of_equations (y,t0,W,F_outgass,n,CO2_dep,Te,mod_sea,alt_frac,Mp_frac,
     
     # Call Cretaceous carbon cycle forward model to obtain current state of carbon cycle, namely ocean chemistry and carbon cycle fluxes, 
     # from parameters, time, and DIC and ALK for ocean and pore space.
-    [Ca,EM_H_o,EM_pH_o,EM_co3_o,EM_hco3_o,EM_co2aq_o,EM_ppCO2_o,EM_Ca_o,EM_H_p,EM_pH_p,EM_co3_p,EM_hco3_p,EM_co2aq_p,EM_ppCO2_p,EM_Ca_p,area,T_surface,T_surface_diff,buffer_T,EM_omega_o,EM_omega_p,Relative_outgassing,weatherability,F_outg,carb_weath,Precip_ocean,Precip_pore,F_diss,F_silic]=Cretaceous_cc([y[0],y[1],y[2],y[3]],t0,cl_sens,deep_grad,PG,change_out,F_outgass,W_plus_1,F_carbw,CWF,CO2_dep,Te,n,coef_for_diss,beta,Ebas)
+    [Ca,EM_H_o,EM_pH_o,EM_co3_o,EM_hco3_o,EM_co2aq_o,EM_ppCO2_o,EM_Ca_o,EM_H_p,EM_pH_p,EM_co3_p,EM_hco3_p,EM_co2aq_p,EM_ppCO2_p,EM_Ca_p,area,T_surface,T_surface_diff,buffer_T,EM_omega_o,EM_omega_p,Relative_outgassing,weatherability,F_outg,carb_weath,Precip_ocean,Precip_pore,F_diss,F_silic] = \
+        Cretaceous_cc([y[0],y[1],y[2],y[3]],t0,cl_sens,deep_grad,PG,change_out,F_outgass,W_plus_1,F_carbw,CWF,CO2_dep,Te,n,coef_for_diss,beta,Ebas)
        
     DICo=y[0]-EM_ppCO2_o*s # Correct dissolved inorganic carbon content of ocean by subtracting atmospheric pCO2 from atmosphere-ocean reservoir (this ensures mass balance)
    
