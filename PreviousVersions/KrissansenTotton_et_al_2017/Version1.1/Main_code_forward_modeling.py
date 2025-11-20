@@ -149,11 +149,11 @@ strt_lim=-.01e2 #start time for plotting (Ma)
 fin_lim=1.01e2 #end time for plotting (Ma)
 
 # Create 2x3 subplot to recreate Fig. 2-4 in  main text
-pylab.figure(figsize=(30,15))
+pylab.figure(figsize=(24,12))
 pylab.subplot(2, 3, 1)  # First subplot shows ocean pH through time
 pylab.plot(all_output[4,:,0],confidence_pH_o[1],'k',label='ocean') #median model output
-pylab.fill_between(all_output[4,:,0], confidence_pH_o[0], confidence_pH_o[2], color='grey', alpha='0.4') #90% confidence model output
-observ_pH_saved=numpy.loadtxt('obs_pH.txt',delimiter=',') #load proxy pH data from text file
+pylab.fill_between(all_output[4,:,0], confidence_pH_o[0], confidence_pH_o[2], color='grey', alpha=0.4) #90% confidence model output
+observ_pH_saved=numpy.loadtxt('/home/taketomo0217/my_study/CarbSilWeathering/PreviousVersions/KrissansenTotton_et_al_2017/Version1.1/obs_pH.txt',delimiter=',') #load proxy pH data from text file
 pylab.errorbar(observ_pH_saved[0,:],observ_pH_saved[1,:],observ_pH_saved[2,:],color='k',marker='o',linestyle="None") #plot proxy data with uncertainty
 ## Define axes, labels, and limits of x-axis:
 pylab.xlabel('Time (Ma)')
@@ -163,8 +163,8 @@ pylab.text(-15, 8.35, 'A', fontsize=16, fontweight='bold', va='top')
 
 pylab.subplot(2, 3, 2) # Second subplot shows atmospheric pCO2 through time
 pylab.plot(all_output[4,:,0],confidence_CO2o[1]/ppCO2,'k',label='RCO2') # median model output
-pylab.fill_between(all_output[4,:,0], confidence_CO2o[0]/ppCO2, confidence_CO2o[2]/ppCO2, color='grey', alpha='0.4') #90% confidence model output
-observ_CO2=numpy.loadtxt('obs_CO2.txt',delimiter=',') #load proxy CO2 data from text file
+pylab.fill_between(all_output[4,:,0], confidence_CO2o[0]/ppCO2, confidence_CO2o[2]/ppCO2, color='grey', alpha=0.4) #90% confidence model output
+observ_CO2=numpy.loadtxt('/home/taketomo0217/my_study/CarbSilWeathering/PreviousVersions/KrissansenTotton_et_al_2017/Version1.1/obs_CO2.txt',delimiter=',') #load proxy CO2 data from text file
 pylab.errorbar(observ_CO2[0,:],observ_CO2[1,:],observ_CO2[2,:],color='k',marker='o',linestyle="None") #plot proxy data with uncertainty
 ## Define axes, labels, and limits of x-axis:
 pylab.xlabel('Time (Ma)')
@@ -174,8 +174,8 @@ pylab.text(-15, 2400, 'B', fontsize=16, fontweight='bold', va='top')
 
 pylab.subplot(2,3,3) # Third subplot shows ocean saturation state through time
 pylab.plot(all_output[4,:,0],confidence_omega_o[1],'k',label='ocean') # median model output
-pylab.fill_between(all_output[4,:,0], confidence_omega_o[0], confidence_omega_o[2], color='grey', alpha='0.4') #90% confidence model output
-observ_omega=numpy.loadtxt('obs_omega_calc.txt',delimiter=',') #load proxy CO2 data from text file
+pylab.fill_between(all_output[4,:,0], confidence_omega_o[0], confidence_omega_o[2], color='grey', alpha=0.4) #90% confidence model output
+observ_omega=numpy.loadtxt('/home/taketomo0217/my_study/CarbSilWeathering/PreviousVersions/KrissansenTotton_et_al_2017/Version1.1/obs_omega_calc.txt',delimiter=',') #load proxy CO2 data from text file
 pylab.errorbar(observ_omega[0,:],observ_omega[1,:],observ_omega[2,:],color='k',marker='o',linestyle="None") #plot proxy data with uncertainty
 ## Define axes, labels, and limits of x-axis:
 pylab.ylabel('Saturation state')
@@ -185,12 +185,12 @@ pylab.text(-15, 4.9, 'C', fontsize=16, fontweight='bold', va='top')
 
 pylab.subplot(2, 3, 4) # Fourth subplot shows surface and deep ocean temperature through time
 pylab.plot(all_output[4,:,0],confidence_Tsurf[1],'k',label='Surface') # median surface temp model output
-pylab.fill_between(all_output[4,:,0], confidence_Tsurf[0], confidence_Tsurf[2], color='grey', alpha='0.4') #90% confidence model output
+pylab.fill_between(all_output[4,:,0], confidence_Tsurf[0], confidence_Tsurf[2], color='grey', alpha=0.4) #90% confidence model output
 pylab.plot(all_output[4,:,0],confidence_Tdeep[1],'r',label='Deep ocean') # median deep ocean temp model output
-pylab.fill_between(all_output[4,:,0], confidence_Tdeep[0], confidence_Tdeep[2], color='red', alpha='0.4') #90% confidence model output
-observ_Td=numpy.loadtxt('obs_Td.txt',delimiter=',') #load deep ocean temperature data from text file
+pylab.fill_between(all_output[4,:,0], confidence_Tdeep[0], confidence_Tdeep[2], color='red', alpha=0.4) #90% confidence model output
+observ_Td=numpy.loadtxt('/home/taketomo0217/my_study/CarbSilWeathering/PreviousVersions/KrissansenTotton_et_al_2017/Version1.1/obs_Td.txt',delimiter=',') #load deep ocean temperature data from text file
 pylab.errorbar(observ_Td[0,:],observ_Td[1,:]+273.15,observ_Td[2,:],color='r',marker='o',linestyle="None") #plot proxy data with uncertainty
-observ_T=numpy.loadtxt('obs_T.txt',delimiter=',')  #load surface temperature data from text file
+observ_T=numpy.loadtxt('/home/taketomo0217/my_study/CarbSilWeathering/PreviousVersions/KrissansenTotton_et_al_2017/Version1.1/obs_T.txt',delimiter=',')  #load surface temperature data from text file
 pylab.errorbar(observ_T[0,:],observ_T[1,:]+273.15,observ_T[2,:],color='k',marker='o',linestyle="None") #plot proxy data with uncertainty
 ## Define axes, labels, and limits of x-axis:
 pylab.ylabel('Temperature (K)')
@@ -201,9 +201,9 @@ pylab.text(-15, 305, 'D', fontsize=16, fontweight='bold', va='top')
 
 pylab.subplot(2, 3, 5) # Fifth subplot shows continental weathering flux and ocean carbonate precipitation through time
 pylab.plot(all_output[4,:,0],confidence_Fs[1]/1e12,'r',label='Cont. weathering') # median cont. weathering model output, converted to Tmol/yr
-pylab.fill_between(all_output[4,:,0], confidence_Fs[0]/1e12, confidence_Fs[2]/1e12, color='red', alpha='0.4')  #90% confidence model output
+pylab.fill_between(all_output[4,:,0], confidence_Fs[0]/1e12, confidence_Fs[2]/1e12, color='red', alpha=0.4)  #90% confidence model output
 pylab.plot(all_output[4,:,0],confidence_Prec_o[1]/1e12,'k',label='ocean precip.') # median ocean precipitation model output, converted to Tmol/yr
-pylab.fill_between(all_output[4,:,0], confidence_Prec_o[0]/1e12, confidence_Prec_o[2]/1e12, color='grey', alpha='0.4')  #90% confidence model output
+pylab.fill_between(all_output[4,:,0], confidence_Prec_o[0]/1e12, confidence_Prec_o[2]/1e12, color='grey', alpha=0.4)  #90% confidence model output
 ## Define axes, labels, and limits of x-axis:
 pylab.ylabel('Fluxes (Tmol/yr)')
 pylab.xlabel('Time (Ma)')  
@@ -213,9 +213,9 @@ pylab.text(-14, 60, 'E', fontsize=16, fontweight='bold', va='top')
 
 pylab.subplot(2, 3, 6)  # Sixth subplot shows seafloor dissolution flux and seafloor carbonate precipitation through time
 pylab.plot(all_output[4,:,0],confidence_Fd[1]/1e12,'r',label='Seafloor dissolution') # median seafloor dissolution model output, converted to Tmol/yr
-pylab.fill_between(all_output[4,:,0], confidence_Fd[0]/1e12, confidence_Fd[2]/1e12, color='red', alpha='0.4') #90% confidence model output
+pylab.fill_between(all_output[4,:,0], confidence_Fd[0]/1e12, confidence_Fd[2]/1e12, color='red', alpha=0.4) #90% confidence model output
 pylab.plot(all_output[4,:,0],confidence_Prec_p[1]/1e12,'k',label='pore precip.') # median pore space carbonate precp. model output, converted to Tmol/yr
-pylab.fill_between(all_output[4,:,0], confidence_Prec_p[0]/1e12, confidence_Prec_p[2]/1e12, color='grey', alpha='0.4') #90% confidence model output
+pylab.fill_between(all_output[4,:,0], confidence_Prec_p[0]/1e12, confidence_Prec_p[2]/1e12, color='grey', alpha=0.4) #90% confidence model output
 ## Define axes, labels, and limits of x-axis:
 pylab.legend(loc=2)     
 pylab.xlim([strt_lim,fin_lim])

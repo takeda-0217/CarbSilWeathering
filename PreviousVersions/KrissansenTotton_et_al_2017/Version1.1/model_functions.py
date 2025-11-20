@@ -100,6 +100,7 @@ def forward_model(W,F_outgass,n,CO2_dep,Te,mod_sea,alt_frac,Mp_frac,W_plus_1,cl_
               
     time=numpy.linspace(0,1e8,100) # Time array for outputs, 100 timesteps between 0 and 100 Ma
     #print ('IC new',DIC_o+1.8e20/Mo*ppCO2_o,ALK_o,DIC_p,ALK_p)    
+    
     # Given initial conditions, unknown parameters, and system of ODEs (below), solve for time evolution of DIC and ALK of ocean and pore space:
     [out,mes]=scipy.integrate.odeint(system_of_equations, [DIC_o+1.8e20/Mo*ppCO2_o,ALK_o,DIC_p,ALK_p], time, args=(W,F_outgass,n,CO2_dep,Te,mod_sea,alt_frac,Mp_frac,W_plus_1,cl_sens,change_out,F_carbw,CWF,deep_grad,coef_for_diss,beta,Ebas,PG),full_output=1)
  
@@ -177,6 +178,7 @@ def forward_model(W,F_outgass,n,CO2_dep,Te,mod_sea,alt_frac,Mp_frac,W_plus_1,cl_
     ############################################################################
     
     # Return selected outputs to Main_code.py for plotting
+    # out[:,0] = DIC_o+1.8e20/Mo*ppCO2_o; out[:,1] = ALK_o; out[:,2] = DIC_p; out[:,3] = ALK_p
     return [out[:,0],out[:,1],out[:,2],out[:,3],time,pH_array_o,CO2_array_o,pH_array_p,CO2_array_p,Ca_array_o,Ca_array_p,CO3_array_o,CO3_array_p,HCO3_array_o,HCO3_array_p,omega_o,omega_p,Tsurf_array,Tdeep_array,Fd_array,Fs_array,Precip_ocean_array,Precip_pore_array],imbalance
    
     

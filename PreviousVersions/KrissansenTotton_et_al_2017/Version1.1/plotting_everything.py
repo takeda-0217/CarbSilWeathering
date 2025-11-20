@@ -37,7 +37,7 @@ def mc_plotter(all_output,decision,legend_counter):
     CO2v=numpy.array([406,782,495,437,340,171,456,1412,656,917,1522,1437,1626,1520,1368,1428,1060,1219,907,449,1117,1325,798,1024,701,309,788])/preinudsmod
     CO2er=numpy.array([5,95,83,96,91,126,201,310,180,218,173,366,700,228,68,128,76,431,424,140,97,333,157,153,511,78,114])/preinudsmod
     #Cenozoic CO2 from Beerling Royer
-    CO2_temp=numpy.loadtxt('Cenozoic_CO2_Beerling_Royer.txt',delimiter=',')
+    CO2_temp=numpy.loadtxt('/home/taketomo0217/my_study/CarbSilWeathering/PreviousVersions/KrissansenTotton_et_al_2017/Version1.1/Cenozoic_CO2_Beerling_Royer.txt',delimiter=',')
     #pylab.figure()
     pylab.subplot(3, 4, 2)
     pylab.plot(all_output[4][:],all_output[6][:]/ppCO2,'r',label='RCO2')
@@ -76,7 +76,7 @@ def mc_plotter(all_output,decision,legend_counter):
     # CO3 from Tyrrel and Zeebe (reconstructed from Ca and omega proxies)
     pylab.plot(all_output[4][:],all_output[11][:],'r',label='CO3 ocean')
     pylab.plot(all_output[4][:],all_output[12][:],'b',label='CO3 pore')
-    CO3_data=numpy.loadtxt('Tyrrell_Zeebe_CO3.txt',delimiter=',')
+    CO3_data=numpy.loadtxt('/home/taketomo0217/my_study/CarbSilWeathering/PreviousVersions/KrissansenTotton_et_al_2017/Version1.1/Tyrrell_Zeebe_CO3.txt',delimiter=',')
     CO3_f=interp1d(numpy.flipud(CO3_data[:,0]),numpy.flipud(CO3_data[:,1]))
     if legend_counter==0:
         pylab.plot(all_output[4][:],CO3_f(all_output[4][:]),'ro')
@@ -91,7 +91,7 @@ def mc_plotter(all_output,decision,legend_counter):
     pylab.plot(all_output[4][:],all_output[15][:],'r',label='ocean')
     pylab.plot(all_output[4][:],all_output[16][:],'b',label='pore space')
     #do proxy stuff
-    CCD_data=numpy.loadtxt('Tyrrell_Zeebe_CCD.txt',delimiter=',')
+    CCD_data=numpy.loadtxt('/home/taketomo0217/my_study/CarbSilWeathering/PreviousVersions/KrissansenTotton_et_al_2017/Version1.1/Tyrrell_Zeebe_CCD.txt',delimiter=',')
     CCD_f=interp1d(numpy.flipud(CCD_data[:,0]),numpy.flipud(CCD_data[:,1]))
     # convert CCD to omega using equation 4 in Jansen et al. 2002, find coefficient first
     #k_CCD=all_output[15][0]/numpy.exp(0.176*(CCD_f(0)-3.06))
@@ -119,10 +119,10 @@ def mc_plotter(all_output,decision,legend_counter):
     if legend_counter==0:
         pylab.errorbar(t1,T1,yerr=er_T1,color='r',marker='o',linestyle="None")
         pylab.errorbar(t1b,T2,yerr=er_T2,color='b',marker='o',linestyle="None")
-    Tdeep_data=numpy.loadtxt('Cenozoic_tdeep_Beerling_Royer.txt',delimiter=',') #ultimaetly from Hansen as cited in Beerling and Royer
+    Tdeep_data=numpy.loadtxt('/home/taketomo0217/my_study/CarbSilWeathering/PreviousVersions/KrissansenTotton_et_al_2017/Version1.1/Cenozoic_tdeep_Beerling_Royer.txt',delimiter=',') #ultimaetly from Hansen as cited in Beerling and Royer
     pylab.plot(Tdeep_data[:,0],Tdeep_data[:,1]+273.15,color='b',marker='o',linestyle="None")
     ## suerface temperature from Hansen 2013
-    hansen_surf=numpy.loadtxt('hansen2013_surf.txt',delimiter=',')
+    hansen_surf=numpy.loadtxt('/home/taketomo0217/my_study/CarbSilWeathering/PreviousVersions/KrissansenTotton_et_al_2017/Version1.1/hansen2013_surf.txt',delimiter=',')
     #IMPORTANT: be aware Hansen surface is just multipliaction by deep sea change, with coefficient of 1. NOT TRUE RECORD
     if legend_counter==0:
         pylab.plot(hansen_surf[:,0],hansen_surf[:,1]+273.15,color='r',marker='o',linestyle="None")
@@ -230,7 +230,7 @@ def mc_plotter_spread(all_output,decision,legend_counter,spread_best): #identica
     CO2v=numpy.array([406,782,495,437,340,171,456,1412,656,917,1522,1437,1626,1520,1368,1428,1060,1219,907,449,1117,1325,798,1024,701,309,788])/preinudsmod
     CO2er=numpy.array([5,95,83,96,91,126,201,310,180,218,173,366,700,228,68,128,76,431,424,140,97,333,157,153,511,78,114])/preinudsmod
     #Cenozoic CO2 from Beerling Royer
-    CO2_temp=numpy.loadtxt('Cenozoic_CO2_Beerling_Royer.txt',delimiter=',')
+    CO2_temp = numpy.loadtxt('/home/taketomo0217/my_study/CarbSilWeathering/PreviousVersions/KrissansenTotton_et_al_2017/Version1.1/Cenozoic_CO2_Beerling_Royer.txt',delimiter=',')
     #pylab.figure()
     pylab.subplot(3, 4, 2)
     pylab.plot(all_output[4][:],all_output[6][:]/ppCO2,'r',label='RCO2')
@@ -269,8 +269,8 @@ def mc_plotter_spread(all_output,decision,legend_counter,spread_best): #identica
     # CO3 from Tyrrel and Zeebe (reconstructed from Ca and omega proxies)
     pylab.plot(all_output[4][:],all_output[11][:],'r',label='CO3 ocean')
     pylab.plot(all_output[4][:],all_output[12][:],'b',label='CO3 pore')
-    CO3_data=numpy.loadtxt('Tyrrell_Zeebe_CO3.txt',delimiter=',')
-    CO3_f=interp1d(numpy.flipud(CO3_data[:,0]),numpy.flipud(CO3_data[:,1]))
+    CO3_data = numpy.loadtxt('/home/taketomo0217/my_study/CarbSilWeathering/PreviousVersions/KrissansenTotton_et_al_2017/Version1.1/Tyrrell_Zeebe_CO3.txt',delimiter=',')
+    CO3_f = interp1d(numpy.flipud(CO3_data[:,0]),numpy.flipud(CO3_data[:,1]))
     if legend_counter==0:
         pylab.plot(all_output[4][:],CO3_f(all_output[4][:]),'ro')
         #pylab.plot(CO3_data[:,0],CO3_data[:,1],'ko')
@@ -284,14 +284,14 @@ def mc_plotter_spread(all_output,decision,legend_counter,spread_best): #identica
     pylab.plot(all_output[4][:],all_output[15][:],'r',label='ocean')
     pylab.plot(all_output[4][:],all_output[16][:],'b',label='pore space')
     #do proxy stuff
-    CCD_data=numpy.loadtxt('Tyrrell_Zeebe_CCD.txt',delimiter=',')
+    CCD_data=numpy.loadtxt('/home/taketomo0217/my_study/CarbSilWeathering/PreviousVersions/KrissansenTotton_et_al_2017/Version1.1/Tyrrell_Zeebe_CCD.txt',delimiter=',')
     CCD_f=interp1d(numpy.flipud(CCD_data[:,0]),numpy.flipud(CCD_data[:,1]))
     # convert CCD to omega using equation 4 in Jansen et al. 2002, find coefficient first
     #k_CCD=all_output[15][0]/numpy.exp(0.176*(CCD_f(0)-3.06))
     k_CCD=all_output[15][0]/numpy.exp(0.189*(CCD_f(0)-3.82))
     CCD=CCD_f(all_output[4][:])
     #omega_proxy=k_CCD*numpy.exp(0.176*(CCD-3.06))
-    omega_proxy=k_CCD*numpy.exp(0.189*(CCD-3.82))
+    omega_proxy = k_CCD*numpy.exp(0.189*(CCD-3.82))
     if legend_counter==0:
         pylab.plot(all_output[4][:],omega_proxy,'ro')
         pylab.legend(loc=2)
@@ -312,10 +312,10 @@ def mc_plotter_spread(all_output,decision,legend_counter,spread_best): #identica
     if legend_counter==0:
         pylab.errorbar(t1,T1,yerr=er_T1,color='r',marker='o',linestyle="None")
         pylab.errorbar(t1b,T2,yerr=er_T2,color='b',marker='o',linestyle="None")
-    Tdeep_data=numpy.loadtxt('Cenozoic_tdeep_Beerling_Royer.txt',delimiter=',') #ultimaetly from Hansen as cited in Beerling and Royer
+    Tdeep_data=numpy.loadtxt('/home/taketomo0217/my_study/CarbSilWeathering/PreviousVersions/KrissansenTotton_et_al_2017/Version1.1/Cenozoic_tdeep_Beerling_Royer.txt',delimiter=',') #ultimaetly from Hansen as cited in Beerling and Royer
     pylab.plot(Tdeep_data[:,0],Tdeep_data[:,1]+273.15,color='b',marker='o',linestyle="None")
     ## suerface temperature from Hansen 2013
-    hansen_surf=numpy.loadtxt('hansen2013_surf.txt',delimiter=',')
+    hansen_surf=numpy.loadtxt('/home/taketomo0217/my_study/CarbSilWeathering/PreviousVersions/KrissansenTotton_et_al_2017/Version1.1/hansen2013_surf.txt',delimiter=',')
     #IMPORTANT: be aware Hansen surface is just multipliaction by deep sea change, with coefficient of 1. NOT TRUE RECORD
     if legend_counter==0:
         pylab.plot(hansen_surf[:,0],hansen_surf[:,1]+273.15,color='r',marker='o',linestyle="None")
@@ -403,13 +403,13 @@ def dist_plotter(all_output,spread_output,sd):
     pylab.subplot(3, 4, 1)
     pylab.plot(all_output[0,4,:],confidence_pH_o[1],'r',label='ocean')
     pylab.plot(all_output[0,4,:],confidence_pH_p[1],'b',label='pore space')
-    pylab.fill_between(all_output[0,4,:], confidence_pH_o[0], confidence_pH_o[2], color='red', alpha='0.4')
-    pylab.fill_between(all_output[0,4,:], confidence_pH_p[0], confidence_pH_p[2], color='blue', alpha='0.4')
+    pylab.fill_between(all_output[0,4,:], confidence_pH_o[0], confidence_pH_o[2], color='red',  alpha=0.4)
+    pylab.fill_between(all_output[0,4,:], confidence_pH_p[0], confidence_pH_p[2], color='blue', alpha=0.4)
     pylab.plot(tpH1,pH1,'ro',linestyle="-")
     pylab.plot(tpH2,pH2,'ro',linestyle="-")
     pylab.xlabel('Time (yr)')
     pylab.ylabel('pH')
-    observ_pH_saved=numpy.loadtxt('obs_pH.txt',delimiter=',')
+    observ_pH_saved=numpy.loadtxt('/home/taketomo0217/my_study/CarbSilWeathering/PreviousVersions/KrissansenTotton_et_al_2017/Version1.1/obs_pH.txt',delimiter=',')
     pylab.errorbar(observ_pH_saved[0,:],observ_pH_saved[1,:],observ_pH_saved[2,:],color='r')
     pylab.legend()
 
@@ -424,19 +424,19 @@ def dist_plotter(all_output,spread_output,sd):
     CO2v=numpy.array([406,782,495,437,340,171,456,1412,656,917,1522,1437,1626,1520,1368,1428,1060,1219,907,449,1117,1325,798,1024,701,309,788])/preinudsmod
     CO2er=numpy.array([5,95,83,96,91,126,201,310,180,218,173,366,700,228,68,128,76,431,424,140,97,333,157,153,511,78,114])/preinudsmod
     #Cenozoic CO2 from Beerling Royer
-    CO2_temp=numpy.loadtxt('Cenozoic_CO2_Beerling_Royer.txt',delimiter=',')
+    CO2_temp=numpy.loadtxt('/home/taketomo0217/my_study/CarbSilWeathering/PreviousVersions/KrissansenTotton_et_al_2017/Version1.1/Cenozoic_CO2_Beerling_Royer.txt',delimiter=',')
     confidence_CO2o=scipy.stats.scoreatpercentile(all_output[:,6,:],[2.5,50,97.5], interpolation_method='fraction',axis=0)
     #pylab.figure()
     pylab.subplot(3, 4, 2)
     pylab.plot(all_output[0,4,:],confidence_CO2o[1]/ppCO2,'r',label='RCO2')
-    pylab.fill_between(all_output[0,4,:], confidence_CO2o[0]/ppCO2, confidence_CO2o[2]/ppCO2, color='red', alpha='0.4')    
+    pylab.fill_between(all_output[0,4,:], confidence_CO2o[0]/ppCO2, confidence_CO2o[2]/ppCO2, color='red', alpha=0.4)    
     pylab.errorbar(tCO2,CO2v,yerr=CO2er,color='r',marker='o',linestyle="None")
     pylab.plot(CO2_temp[:,0],CO2_temp[:,1]/preinudsmod,color='r',marker='o',linestyle="None")
     pylab.xlabel('Time (yr)')
     pylab.ylabel('CO2 relative to modern')
     pylab.legend(loc=2)
     
-    observ_CO2=numpy.loadtxt('obs_CO2.txt',delimiter=',')
+    observ_CO2 = numpy.loadtxt('/home/taketomo0217/my_study/CarbSilWeathering/PreviousVersions/KrissansenTotton_et_al_2017/Version1.1/obs_CO2.txt',delimiter=',')
     pylab.errorbar(observ_CO2[0,:],observ_CO2[1,:],observ_CO2[2,:],color='r')
     
     #########################
@@ -452,8 +452,8 @@ def dist_plotter(all_output,spread_output,sd):
     pylab.subplot(3, 4, 3)
     pylab.plot(all_output[0,4,:],confidence_Ca_o[1],'r',label='Ca ocean')
     pylab.plot(all_output[0,4,:],confidence_Ca_p[1],'b',label='Ca pore')
-    pylab.fill_between(all_output[0,4,:], confidence_Ca_o[0], confidence_Ca_o[2], color='red', alpha='0.4')  
-    pylab.fill_between(all_output[0,4,:], confidence_Ca_p[0], confidence_Ca_p[2], color='red', alpha='0.4')  
+    pylab.fill_between(all_output[0,4,:], confidence_Ca_o[0], confidence_Ca_o[2], color='red', alpha=0.4)  
+    pylab.fill_between(all_output[0,4,:], confidence_Ca_p[0], confidence_Ca_p[2], color='red', alpha=0.4)  
     #pylab.plot(all_output[4][:],Ca_fun(all_output[4][:]),'rx',label="Ca proxie Horita") #optional curve
     # Alternatively use data points from Horita table 2, and Cretaceous 94 Ma value from Timofeeff 2006
     tCa=numpy.array([5,14,35,37,94])*10**6
@@ -463,8 +463,8 @@ def dist_plotter(all_output,spread_output,sd):
     pylab.errorbar(tCa,Ca_prox,yerr=[Ca_prox-Ca_prox_low, Ca_prox_high-Ca_prox],color='r',marker='o',linestyle="None")    
     pylab.plot(all_output[0,4,:],confidence_HCO3_o[1],'k',label='HCO3 ocean')
     pylab.plot(all_output[0,4,:],confidence_HCO3_p[1],'g',label='HCO3 pore')
-    pylab.fill_between(all_output[0,4,:],confidence_HCO3_o[0],confidence_HCO3_o[2], color='grey', alpha='0.4')
-    pylab.fill_between(all_output[0,4,:],confidence_HCO3_p[0],confidence_HCO3_p[2], color='green', alpha='0.4')   
+    pylab.fill_between(all_output[0,4,:],confidence_HCO3_o[0],confidence_HCO3_o[2], color='grey', alpha=0.4)
+    pylab.fill_between(all_output[0,4,:],confidence_HCO3_p[0],confidence_HCO3_p[2], color='green', alpha=0.4)   
     pylab.xlabel('Molality (mol/kg)')
     pylab.xlabel('Time (yr)')
     pylab.legend(loc=2)
@@ -474,9 +474,9 @@ def dist_plotter(all_output,spread_output,sd):
     # CO3 from Tyrrel and Zeebe (reconstructed from Ca and omega proxies)
     pylab.plot(all_output[0,4,:],confidence_CO3_o[1],'r',label='CO3 ocean')
     pylab.plot(all_output[0,4,:],confidence_CO3_p[1],'b',label='CO3 pore')
-    pylab.fill_between(all_output[0,4,:], confidence_CO3_o[0], confidence_CO3_o[2], color='red', alpha='0.4')  
-    pylab.fill_between(all_output[0,4,:], confidence_CO3_p[0], confidence_CO3_p[2], color='blue', alpha='0.4')  
-    CO3_data=numpy.loadtxt('Tyrrell_Zeebe_CO3.txt',delimiter=',')
+    pylab.fill_between(all_output[0,4,:], confidence_CO3_o[0], confidence_CO3_o[2], color='red', alpha=0.4)  
+    pylab.fill_between(all_output[0,4,:], confidence_CO3_p[0], confidence_CO3_p[2], color='blue', alpha=0.4)  
+    CO3_data=numpy.loadtxt('/home/taketomo0217/my_study/CarbSilWeathering/PreviousVersions/KrissansenTotton_et_al_2017/Version1.1/Tyrrell_Zeebe_CO3.txt',delimiter=',')
     CO3_f=interp1d(numpy.flipud(CO3_data[:,0]),numpy.flipud(CO3_data[:,1]))
     pylab.plot(all_output[0,4,:],CO3_f(all_output[0,4,:]),'ro')
     #pylab.plot(CO3_data[:,0],CO3_data[:,1],'ko')
@@ -491,10 +491,10 @@ def dist_plotter(all_output,spread_output,sd):
     confidence_omega_p=scipy.stats.scoreatpercentile(all_output[:,16,:],[2.5,50,97.5], interpolation_method='fraction',axis=0)
     pylab.plot(all_output[0,4,:],confidence_omega_o[1],'r',label='ocean')
     pylab.plot(all_output[0,4,:],confidence_omega_p[1],'b',label='pore space')
-    pylab.fill_between(all_output[0,4,:], confidence_omega_o[0],confidence_omega_o[2], color='red', alpha='0.4')  
-    pylab.fill_between(all_output[0,4,:], confidence_omega_p[0], confidence_omega_p[2], color='blue', alpha='0.4')  
+    pylab.fill_between(all_output[0,4,:], confidence_omega_o[0],confidence_omega_o[2], color='red', alpha=0.4)  
+    pylab.fill_between(all_output[0,4,:], confidence_omega_p[0], confidence_omega_p[2], color='blue', alpha=0.4)  
     #do proxy stuff
-    CCD_data=numpy.loadtxt('Tyrrell_Zeebe_CCD.txt',delimiter=',')
+    CCD_data=numpy.loadtxt('/home/taketomo0217/my_study/CarbSilWeathering/PreviousVersions/KrissansenTotton_et_al_2017/Version1.1/Tyrrell_Zeebe_CCD.txt',delimiter=',')
     CCD_f=interp1d(numpy.flipud(CCD_data[:,0]),numpy.flipud(CCD_data[:,1]))
     # convert CCD to omega using equation 4 in Jansen et al. 2002, find coefficient first
     #k_CCD=all_output[0,15,0]/numpy.exp(0.176*(CCD_f(0)-3.06))
@@ -518,16 +518,16 @@ def dist_plotter(all_output,spread_output,sd):
     confidence_Tdeep=scipy.stats.scoreatpercentile(all_output[:,18,:],[2.5,50,97.5], interpolation_method='fraction',axis=0)
     #pylab.figure()
     pylab.subplot(3, 4, 6)
-    pylab.fill_between(all_output[0,4,:], confidence_Tsurf[0], confidence_Tsurf[2], color='red', alpha='0.4')  
-    pylab.fill_between(all_output[0,4,:], confidence_Tdeep[0], confidence_Tdeep[2], color='blue', alpha='0.4')  
+    pylab.fill_between(all_output[0,4,:], confidence_Tsurf[0], confidence_Tsurf[2], color='red', alpha=0.4)  
+    pylab.fill_between(all_output[0,4,:], confidence_Tdeep[0], confidence_Tdeep[2], color='blue', alpha=0.4)  
     pylab.plot(all_output[0,4,:],confidence_Tsurf[1],'r',label='Surface')
     pylab.plot(all_output[0,4,:],confidence_Tdeep[1],'b',label='Deep')
     pylab.errorbar(t1,T1,yerr=er_T1,color='r',marker='o',linestyle="None")
     pylab.errorbar(t1b,T2,yerr=er_T2,color='b',marker='o',linestyle="None")
-    Tdeep_data=numpy.loadtxt('Cenozoic_tdeep_Beerling_Royer.txt',delimiter=',') #ultimaetly from Hansen as cited in Beerling and Royer
+    Tdeep_data=numpy.loadtxt('/home/taketomo0217/my_study/CarbSilWeathering/PreviousVersions/KrissansenTotton_et_al_2017/Version1.1/Cenozoic_tdeep_Beerling_Royer.txt',delimiter=',') #ultimaetly from Hansen as cited in Beerling and Royer
     pylab.plot(Tdeep_data[:,0],Tdeep_data[:,1]+273.15,color='b',marker='o',linestyle="None")
     ## suerface temperature from Hansen 2013
-    hansen_surf=numpy.loadtxt('hansen2013_surf.txt',delimiter=',')
+    hansen_surf=numpy.loadtxt('/home/taketomo0217/my_study/CarbSilWeathering/PreviousVersions/KrissansenTotton_et_al_2017/Version1.1/hansen2013_surf.txt',delimiter=',')
     #IMPORTANT: be aware Hansen surface is just multipliaction by deep sea change, with coefficient of 1. NOT TRUE RECORD
     pylab.plot(hansen_surf[:,0],hansen_surf[:,1]+273.15,color='r',marker='o',linestyle="None")
     pylab.ylabel('Temperature (K)')
@@ -543,8 +543,8 @@ def dist_plotter(all_output,spread_output,sd):
     pylab.subplot(3, 4, 7)
     pylab.plot(all_output[0,4,:], confidence_Fs[1],'b',label='Continental weathering')
     pylab.plot(all_output[0,4,:],confidence_Prec_o[1],'g',label='ocean precip.')
-    pylab.fill_between(all_output[0,4,:], confidence_Fs[0], confidence_Fs[2], color='blue', alpha='0.4')  
-    pylab.fill_between(all_output[0,4,:], confidence_Prec_o[0], confidence_Prec_o[2], color='green', alpha='0.4')  
+    pylab.fill_between(all_output[0,4,:], confidence_Fs[0], confidence_Fs[2], color='blue', alpha=0.4)  
+    pylab.fill_between(all_output[0,4,:], confidence_Prec_o[0], confidence_Prec_o[2], color='green', alpha=0.4)  
     pylab.ylabel('Fluxes (mol C/yr)')
     pylab.xlabel('Time (yr)')     
     pylab.legend(loc=2)     
@@ -552,8 +552,8 @@ def dist_plotter(all_output,spread_output,sd):
     pylab.subplot(3, 4, 8)
     pylab.plot(all_output[0,4,:],confidence_Fd[1],'r',label='Seafloor dissolution')
     pylab.plot(all_output[0,4,:],confidence_Prec_p[1],'k',label='pore precip.')
-    pylab.fill_between(all_output[0,4,:], confidence_Fd[0], confidence_Fd[2], color='red', alpha='0.4')  
-    pylab.fill_between(all_output[0,4,:], confidence_Prec_p[0], confidence_Prec_p[2], color='grey', alpha='0.4')  
+    pylab.fill_between(all_output[0,4,:], confidence_Fd[0], confidence_Fd[2], color='red', alpha=0.4)  
+    pylab.fill_between(all_output[0,4,:], confidence_Prec_p[0], confidence_Prec_p[2], color='grey', alpha=0.4)  
     #Gillis and Coogan estimates for precip are found in Notes2
     t_prec=numpy.array([98.*10**6])
     
@@ -624,10 +624,10 @@ def dist_plotter(all_output,spread_output,sd):
     pylab.plot(all_output[0,4,:],confidence_DICp[1],'g',label='DIC_p')
     pylab.plot(all_output[0,4,:],confidence_ALKp[1],'k',label='ALK_p')
     
-    pylab.fill_between(all_output[0,4,:], confidence_DICo[0], confidence_DICo[2], color='red', alpha='0.4')  
-    pylab.fill_between(all_output[0,4,:], confidence_ALKo[0], confidence_ALKo[2], color='blue', alpha='0.4')  
-    pylab.fill_between(all_output[0,4,:], confidence_DICp[0], confidence_DICp[2], color='green', alpha='0.4')  
-    #pylab.fill_between(all_output[0,4,:], confidence_ALKp[0], confidence_ALKp[2], color='grey', alpha='0.4')  
+    pylab.fill_between(all_output[0,4,:], confidence_DICo[0], confidence_DICo[2], color='red', alpha=0.4)  
+    pylab.fill_between(all_output[0,4,:], confidence_ALKo[0], confidence_ALKo[2], color='blue', alpha=0.4)  
+    pylab.fill_between(all_output[0,4,:], confidence_DICp[0], confidence_DICp[2], color='green', alpha=0.4)  
+    #pylab.fill_between(all_output[0,4,:], confidence_ALKp[0], confidence_ALKp[2], color='grey', alpha=0.4)  
     
     pylab.xlabel('Time (yr)')
     pylab.ylabel('Molality (mol/kg)')
@@ -654,11 +654,11 @@ def dist_plotter(all_output,spread_output,sd):
     pylab.figure(figsize=(30,15))
     pylab.subplot(3, 3, 1)
     pylab.plot(all_output[0,4,:],confidence_pH_o[1],'k',label='ocean')
-    pylab.fill_between(all_output[0,4,:], confidence_pH_o[0], confidence_pH_o[2], color='grey', alpha='0.4')
+    pylab.fill_between(all_output[0,4,:], confidence_pH_o[0], confidence_pH_o[2], color='grey', alpha=0.4)
     #pylab.plot(tpH1/1e6,pH1,'ko',linestyle="--")
     #pylab.plot(tpH2/1e6,pH2,'ko',linestyle="--")
     ##
-    observ_pH_saved=numpy.loadtxt('obs_pH.txt',delimiter=',')
+    observ_pH_saved=numpy.loadtxt('/home/taketomo0217/my_study/CarbSilWeathering/PreviousVersions/KrissansenTotton_et_al_2017/Version1.1/obs_pH.txt',delimiter=',')
     pylab.errorbar(observ_pH_saved[0,:],observ_pH_saved[1,:],observ_pH_saved[2,:],color='k',marker='o',linestyle="None")
     ##
     pylab.xlabel('Time (Ma)')
@@ -670,11 +670,11 @@ def dist_plotter(all_output,spread_output,sd):
 
     pylab.subplot(3, 3, 2)
     pylab.plot(all_output[0,4,:],confidence_CO2o[1]/ppCO2,'k',label='Atmospheric CO2')
-    pylab.fill_between(all_output[0,4,:], confidence_CO2o[0]/ppCO2, confidence_CO2o[2]/ppCO2, color='grey', alpha='0.4')    
+    pylab.fill_between(all_output[0,4,:], confidence_CO2o[0]/ppCO2, confidence_CO2o[2]/ppCO2, color='grey', alpha=0.4)    
     #pylab.errorbar(tCO2/1e6,CO2v,yerr=CO2er,color='k',marker='o',linestyle="None")
     #pylab.plot(CO2_temp[:,0]/1e6,CO2_temp[:,1]/preinudsmod,color='k',marker='o',linestyle="None")
     ##
-    observ_CO2=numpy.loadtxt('obs_CO2.txt',delimiter=',')
+    observ_CO2=numpy.loadtxt('/home/taketomo0217/my_study/CarbSilWeathering/PreviousVersions/KrissansenTotton_et_al_2017/Version1.1/obs_CO2.txt',delimiter=',')
     pylab.errorbar(observ_CO2[0,:],observ_CO2[1,:],observ_CO2[2,:],color='k',marker='o',linestyle="None")
     ##
     pylab.xlabel('Time (Ma)')
@@ -686,11 +686,11 @@ def dist_plotter(all_output,spread_output,sd):
 
     pylab.subplot(3,3 ,3)
     pylab.plot(all_output[0,4,:],confidence_omega_o[1],'k',label='ocean')
-    pylab.fill_between(all_output[0,4,:], confidence_omega_o[0],confidence_omega_o[2], color='grey', alpha='0.4')  
+    pylab.fill_between(all_output[0,4,:], confidence_omega_o[0],confidence_omega_o[2], color='grey', alpha=0.4)  
     #do proxy stuff
     #pylab.plot(all_output[0,4,:],omega_proxy,'ko')
     ##
-    observ_omega=numpy.loadtxt('obs_omega_calc.txt',delimiter=',') #calcite
+    observ_omega=numpy.loadtxt('/home/taketomo0217/my_study/CarbSilWeathering/PreviousVersions/KrissansenTotton_et_al_2017/Version1.1/obs_omega_calc.txt',delimiter=',') #calcite
     pylab.errorbar(observ_omega[0,:],observ_omega[1,:],observ_omega[2,:],color='k',marker='o',linestyle="None")
     ##
     #pylab.legend(loc=2)
@@ -701,8 +701,8 @@ def dist_plotter(all_output,spread_output,sd):
       fontsize=16, fontweight='bold', va='top')
     
     pylab.subplot(3, 3, 4)
-    pylab.fill_between(all_output[0,4,:], confidence_Tsurf[0], confidence_Tsurf[2], color='grey', alpha='0.4')  
-    pylab.fill_between(all_output[0,4,:], confidence_Tdeep[0], confidence_Tdeep[2], color='red', alpha='0.4')  
+    pylab.fill_between(all_output[0,4,:], confidence_Tsurf[0], confidence_Tsurf[2], color='grey', alpha=0.4)  
+    pylab.fill_between(all_output[0,4,:], confidence_Tdeep[0], confidence_Tdeep[2], color='red', alpha=0.4)  
     pylab.plot(all_output[0,4,:],confidence_Tsurf[1],'k',label='Surface')
     pylab.plot(all_output[0,4,:],confidence_Tdeep[1],'r',label='Deep ocean')
     #pylab.errorbar(t1/1e6,T1,yerr=er_T1,color='k',marker='o',linestyle="None")
@@ -710,9 +710,9 @@ def dist_plotter(all_output,spread_output,sd):
     #pylab.plot(Tdeep_data[:,0]/1e6,Tdeep_data[:,1]+273.15,color='r',marker='o',linestyle="None")
     ## suerface temperature from Hansen 2013
     ##
-    observ_Td=numpy.loadtxt('obs_Td.txt',delimiter=',')
+    observ_Td=numpy.loadtxt('/home/taketomo0217/my_study/CarbSilWeathering/PreviousVersions/KrissansenTotton_et_al_2017/Version1.1/obs_Td.txt',delimiter=',')
     pylab.errorbar(observ_Td[0,:],observ_Td[1,:]+273.15,observ_Td[2,:],color='r',marker='o',linestyle="None")#time_CO2
-    observ_T=numpy.loadtxt('obs_T.txt',delimiter=',')
+    observ_T=numpy.loadtxt('/home/taketomo0217/my_study/CarbSilWeathering/PreviousVersions/KrissansenTotton_et_al_2017/Version1.1/obs_T.txt',delimiter=',')
     pylab.errorbar(observ_T[0,:],observ_T[1,:]+273.15,observ_T[2,:],color='k',marker='o',linestyle="None")#time_CO2    
     ##
     pylab.ylabel('Temperature (K)')
@@ -725,8 +725,8 @@ def dist_plotter(all_output,spread_output,sd):
     pylab.subplot(3,3,5)
     pylab.plot(all_output[0,4,:], confidence_Fs[1]/1e12,'r',label='Cont. weathering')
     pylab.plot(all_output[0,4,:],confidence_Prec_o[1]/1e12,'k',label='ocean precip.')
-    pylab.fill_between(all_output[0,4,:], confidence_Fs[0]/1e12, confidence_Fs[2]/1e12, color='red', alpha='0.4')  
-    pylab.fill_between(all_output[0,4,:], confidence_Prec_o[0]/1e12, confidence_Prec_o[2]/1e12, color='grey', alpha='0.4')  
+    pylab.fill_between(all_output[0,4,:], confidence_Fs[0]/1e12, confidence_Fs[2]/1e12, color='red', alpha=0.4)  
+    pylab.fill_between(all_output[0,4,:], confidence_Prec_o[0]/1e12, confidence_Prec_o[2]/1e12, color='grey', alpha=0.4)  
     pylab.ylabel('Fluxes (Tmol/yr)')
     pylab.xlabel('Time (Ma)')     
     pylab.legend(loc=2)  
@@ -737,8 +737,8 @@ def dist_plotter(all_output,spread_output,sd):
     pylab.subplot(3, 3, 6)
     pylab.plot(all_output[0,4,:],confidence_Fd[1]/1e12,'r',label='Seafloor dissolution')
     pylab.plot(all_output[0,4,:],confidence_Prec_p[1]/1e12,'k',label='pore precip.')
-    pylab.fill_between(all_output[0,4,:], confidence_Fd[0]/1e12, confidence_Fd[2]/1e12, color='red', alpha='0.4')  
-    pylab.fill_between(all_output[0,4,:], confidence_Prec_p[0]/1e12, confidence_Prec_p[2]/1e12, color='grey', alpha='0.4')  
+    pylab.fill_between(all_output[0,4,:], confidence_Fd[0]/1e12, confidence_Fd[2]/1e12, color='red', alpha=0.4)  
+    pylab.fill_between(all_output[0,4,:], confidence_Prec_p[0]/1e12, confidence_Prec_p[2]/1e12, color='grey', alpha=0.4)  
     pylab.errorbar(t_prec/1e6,prec/1e12,yerr=prec_er/1e12,color='k',marker='o',linestyle="None")
     pylab.legend(loc=2) 
     pylab.ylabel('Fluxes (Tmol/yr)')
@@ -748,7 +748,7 @@ def dist_plotter(all_output,spread_output,sd):
     
     ## old figures for relative change
     #pylab.subplot(3, 3, 7)
-    #pylab.hist(numpy.mean(all_output[:,19,98:],axis=1)/all_output[:,19,0], bins=30,color='grey',normed=True)
+    #pylab.hist(numpy.mean(all_output[:,19,98:],axis=1)/all_output[:,19,0], bins=30,color='grey',density=True)
     #pylab.xlabel('relative change dissolution seafloor')
     #pylab.ylabel('Probability density')
     ##pylab.errorbar(spread*5.241,10,xerr=spread*1.911,color='r',marker='o',linestyle="None")
@@ -759,7 +759,7 @@ def dist_plotter(all_output,spread_output,sd):
 
     #
     #pylab.subplot(3, 3, 8)
-    #pylab.hist(numpy.mean(all_output[:,20,98:],axis=1)/all_output[:,20,0],bins=30,color='grey',normed=True)
+    #pylab.hist(numpy.mean(all_output[:,20,98:],axis=1)/all_output[:,20,0],bins=30,color='grey',density=True)
     #pylab.xlabel('relative change silicate weathering')
     #pylab.ylabel('Probability density')
     dist_2=numpy.mean(all_output[:,20,98:],axis=1)/all_output[:,20,0]
@@ -768,7 +768,7 @@ def dist_plotter(all_output,spread_output,sd):
 
 
     pylab.subplot(3, 3, 8)
-    pylab.hist2d(numpy.mean(all_output[:,20,98:],axis=1)/all_output[:,20,0], numpy.mean(all_output[:,19,98:],axis=1)/all_output[:,19,0], bins=30,normed=True,cmap=pylab.cm.jet)
+    pylab.hist2d(numpy.mean(all_output[:,20,98:],axis=1)/all_output[:,20,0], numpy.mean(all_output[:,19,98:],axis=1)/all_output[:,19,0], bins=30,density=True,cmap=pylab.cm.jet)
     pylab.colorbar(label='Probability density')
     pylab.xlabel('Relative change continental silicate weathering')
     pylab.ylabel('Relative change seafloor weathering')
