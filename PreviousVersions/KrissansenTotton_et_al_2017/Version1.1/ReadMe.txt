@@ -76,6 +76,7 @@ This script contains the following functions which, taken together, define and s
 
 %% plotting_everything.py:
     Called to plot MCMC outputs
+    Fig
 
 END EXPLANATION OF CODE STRUCTURE
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

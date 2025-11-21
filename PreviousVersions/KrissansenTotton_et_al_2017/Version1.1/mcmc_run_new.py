@@ -310,7 +310,7 @@ for x_ex in flatchain[numpy.random.randint(len(flatchain), size=100)]:
     #outputs=forward_model_old(x_ex[0],x_ex[1],x_ex[2],x_ex[3],x_ex[4],x_ex[5],x_ex[6],x_ex[7],x_ex[8],x_ex[9],x_ex[10],x_ex[11],x_ex[12],x_ex[13],x_ex[14],x_ex[15],x_ex[16])
     [outputs,imbalance] = forward_model(x_ex[8],x_ex[6],x_ex[9],x_ex[0],x_ex[1],0.45e12,x_ex[10],0.01,x_ex[2],x_ex[3],x_ex[4],x_ex[7],x_ex[14],x_ex[5],x_ex[11],x_ex[12],x_ex[15],x_ex[13],x_ex[16])
     
-    sp=((x_ex[6]+x_ex[4]*x_ex[6])/x_ex[6])**x_ex[15]
+    sp=((x_ex[6]+x_ex[4]*x_ex[6])/x_ex[6])**x_ex[15]  # sp = (1+V)**beta: spreading rate relative to modern
     mc_plotter_spread(outputs,"y",legend_counter,sp)
     legend_counter=legend_counter+1
 
@@ -347,14 +347,14 @@ print (numpy.percentile(numpy.array(change_precip_array),16),numpy.percentile(nu
 
 #final subplot  
 pylab.subplot(3, 3, 9)
-pylab.hist2d(sil_change, seafloor_change, range=[[-1, 6], [0, 6]],bins=30,normed=True,cmap=pylab.cm.jet)
+pylab.hist2d(sil_change, seafloor_change, range=[[-1, 6], [0, 6]],bins=30,density=True,cmap=pylab.cm.jet)
 pylab.colorbar(label='Probability density')
 pylab.xlabel('Decrease in continental weathering\nsince mid Cretaceous (Tmol/yr)')
 pylab.ylabel('Decrease in seafloor weathering\nsince mid Cretaceous (Tmol/yr)')
 
 # carbonate plot:
 pylab.subplot(3, 3, 7)
-pylab.hist(numpy.array(carbw_factor),bins=30,color='grey',normed=True)
+pylab.hist(numpy.array(carbw_factor),bins=30,color='grey',density=True)
 pylab.xlabel('Relative change carbonate weathering')
 pylab.ylabel('Probability density')
 print (numpy.percentile(numpy.array(carbw_factor),2.5),numpy.percentile(numpy.array(carbw_factor),50),numpy.percentile(numpy.array(carbw_factor),97.5))
@@ -363,17 +363,17 @@ pylab.show()
 
 
 pylab.figure()
-pylab.hist(sil_change,bins=30,color='grey',normed=True)
+pylab.hist(sil_change,bins=30,color='grey',density=True)
 pylab.xlabel('Absolute change silicate weathering')
 pylab.ylabel('Probability density')
 
 pylab.figure()
-pylab.hist(seafloor_change,bins=30,color='grey',normed=True)
+pylab.hist(seafloor_change,bins=30,color='grey',density=True)
 pylab.xlabel('Absolute change seafloor weathering')
 pylab.ylabel('Probability density')
 
 pylab.figure()
-pylab.hist2d(sil_change, seafloor_change, range=[[-1, 6], [-1, 6]],bins=30,normed=True,cmap=pylab.cm.jet)
+pylab.hist2d(sil_change, seafloor_change, range=[[-1, 6], [-1, 6]],bins=30,density=True,cmap=pylab.cm.jet)
 pylab.colorbar(label='Probability density')
 pylab.xlabel('Decrease in continental silicate weathering\nsince mid Cretaceous (Tmol/yr)')
 pylab.ylabel('Decrease in seafloor weathering\nsince mid Cretaceous (Tmol/yr)')

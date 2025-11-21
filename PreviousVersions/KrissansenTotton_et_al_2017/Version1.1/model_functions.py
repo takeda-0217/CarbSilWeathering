@@ -9,6 +9,13 @@ from thermodynamic_variables import Sol_prod
 # Proportionality constants for carbon cycle functions are also calculated from initial conditions.
 # Next, the ODE solver is called, and the system of equations describing the carbon cycle are solved.
 # The time evolution for selected outputs are returned to Main_code.py
+
+#--------------------------#
+#  Parameters explanation  #
+#--------------------------#
+# input W: timescale of ocean circulation (yr) through pore space (residence time of seawater for sea<=>pore mixing)
+# Note: input W convert to mixing rate W(kg/yr)
+
 def forward_model(W,F_outgass,n,CO2_dep,Te,mod_sea,alt_frac,Mp_frac,W_plus_1,cl_sens,change_out,F_carbw,frac_pel,CWF,deep_grad,coef_for_diss,beta,Ebas,PG):
     #import pdb
     #pdb.set_trace()
