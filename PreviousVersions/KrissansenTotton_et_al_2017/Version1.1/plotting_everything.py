@@ -17,7 +17,7 @@ def mc_plotter(all_output,decision,legend_counter):
     pH2=numpy.array([7.8,8.07,7.95,7.79,7.54,7.99,7.84,7.92,7.42,7.62,7.48,7.54,7.42])
     #pylab.figure()
     if decision=="n":
-        pylab.figure(figsize=(18,10))
+        pylab.figure(figsize=(30,15))
     pylab.subplot(3, 4, 1)
     pylab.plot(all_output[4][:],all_output[5][:],'r',label='ocean')
     pylab.plot(all_output[4][:],all_output[7][:],'b',label='pore space')
@@ -210,7 +210,7 @@ def mc_plotter_spread(all_output,decision,legend_counter,spread_best): #identica
     pH2=numpy.array([7.8,8.07,7.95,7.79,7.54,7.99,7.84,7.92,7.42,7.62,7.48,7.54,7.42])
     #pylab.figure()
     if decision=="n":
-        pylab.figure(figsize=(18,10))
+        pylab.figure(figsize=(30,15))
     pylab.subplot(3, 4, 1)
     pylab.plot(all_output[4][:],all_output[5][:],'r',label='ocean')
     pylab.plot(all_output[4][:],all_output[7][:],'b',label='pore space')
@@ -399,7 +399,7 @@ def dist_plotter(all_output,spread_output,sd):
     confidence_pH_p=scipy.stats.scoreatpercentile(all_output[:,7,:],[2.5,50,97.5], interpolation_method='fraction',axis=0)
     #pylab.figure()
 
-    pylab.figure(figsize=(18,10))
+    pylab.figure(figsize=(30,15))
     pylab.subplot(3, 4, 1)
     pylab.plot(all_output[0,4,:],confidence_pH_o[1],'r',label='ocean')
     pylab.plot(all_output[0,4,:],confidence_pH_p[1],'b',label='pore space')
@@ -651,7 +651,7 @@ def dist_plotter(all_output,spread_output,sd):
     
     strt_lim=-.01e2
     fin_lim=1.01e2
-    pylab.figure(figsize=(18,10))
+    pylab.figure(figsize=(30,15))
     pylab.subplot(3, 3, 1)
     pylab.plot(all_output[0,4,:],confidence_pH_o[1],'k',label='ocean')
     pylab.fill_between(all_output[0,4,:], confidence_pH_o[0], confidence_pH_o[2], color='grey', alpha=0.4)
@@ -768,8 +768,8 @@ def dist_plotter(all_output,spread_output,sd):
 
 
     pylab.subplot(3, 3, 8)
-    pylab.hist2d(numpy.mean(all_output[:,20,98:],axis=1)/all_output[:,20,0], numpy.mean(all_output[:,19,98:],axis=1)/all_output[:,19,0], bins=30,density=True,cmap=pylab.cm.jet)
-    pylab.colorbar(label='Probability density')
+    #pylab.hist2d(numpy.mean(all_output[:,20,98:],axis=1)/all_output[:,20,0], numpy.mean(all_output[:,19,98:],axis=1)/all_output[:,19,0], bins=30,density=True,cmap=pylab.cm.jet)
+    #pylab.colorbar(label='Probability density')
     pylab.xlabel('Relative change continental silicate weathering')
     pylab.ylabel('Relative change seafloor weathering')
     pylab.show()

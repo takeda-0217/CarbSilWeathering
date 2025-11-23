@@ -50,10 +50,13 @@ flatchain2[:,7]=flatchain2[:,7]/1e12        # Convert to Tmol: modern carbonate 
 
 from matplotlib import rc
 ## Plot posteriors as corner plots (compare to Fig. 6 in the paper)
-corner.corner(flatchain2[:,[0,1,2,3,4]],     quantiles=[0.16, 0.5, 0.84],labels = [r"CO$_2$-dependence, $\alpha$", "Temp. dep. cont.\nweathering, $T_e$ (K)", "Relative Cretaceous\nweatherability, 1+$W$","Climate sensitivity,\n${\Delta}T_{2X}$ (K)","Relative Cretaceous\noutgassing, 1+$V$"])#,truths=values[ii,jj,:])
-corner.corner(flatchain2[:,[5,8,11,13,6,16]], quantiles=[0.16, 0.5, 0.84],labels = ["Carbonate weath.\nmodifier, 1+$C_{WF}$",r"Circulation time, $\tau$ (kyr)","Surface-deep\ntemp. gradient, $a_{grad}$","Temp. dependence\nseafloor, $E_{bas}$ (kJ/mol)","Modern outgassing,\n$F_{out}^{mod}$ (Tmol C/yr)","Paleogeography parameter,\n${\Delta}P$ (K)"])#,truths=values[ii,jj,:])
-corner.corner(flatchain2[:,[7,9,10,12,14,15]], quantiles=[0.16, 0.5, 0.84],labels = ["Modern carb.\nweathering, $F_{carb}^{mod}$ (Tmol C/yr)","Carb. precip.\ncoefficient, $n$","Modern seafloor diss.\nrelative precip.","pH dependence\nseafloor, $\gamma$","Modern pelagic\nfraction",r"Spreading rate dep., $\beta$"])#,truths=values[ii,jj,:])
+# corner.corner(flatchain2[:,[0,1,2,3,4]],     quantiles=[0.16, 0.5, 0.84],labels = [r"CO$_2$-dependence, $\alpha$", "Temp. dep. cont.\nweathering, $T_e$ (K)", "Relative Cretaceous\nweatherability, 1+$W$","Climate sensitivity,\n${\Delta}T_{2X}$ (K)","Relative Cretaceous\noutgassing, 1+$V$"])#,truths=values[ii,jj,:])
+# corner.corner(flatchain2[:,[5,8,11,13,6,16]], quantiles=[0.16, 0.5, 0.84],labels = ["Carbonate weath.\nmodifier, 1+$C_{WF}$",r"Circulation time, $\tau$ (kyr)","Surface-deep\ntemp. gradient, $a_{grad}$","Temp. dependence\nseafloor, $E_{bas}$ (kJ/mol)","Modern outgassing,\n$F_{out}^{mod}$ (Tmol C/yr)","Paleogeography parameter,\n${\Delta}P$ (K)"])#,truths=values[ii,jj,:])
+# corner.corner(flatchain2[:,[7,9,10,12,14,15]], quantiles=[0.16, 0.5, 0.84],labels = ["Modern carb.\nweathering, $F_{carb}^{mod}$ (Tmol C/yr)","Carb. precip.\ncoefficient, $n$","Modern seafloor diss.\nrelative precip.","pH dependence\nseafloor, $\gamma$","Modern pelagic\nfraction",r"Spreading rate dep., $\beta$"])#,truths=values[ii,jj,:])
 
+# pl.figure()
+# pl.plot([0, 1], [0, 1])
+# pl.show()
 
 ## Confidence intervals for unknown parameter:
 ab, bc, cd,de,ef ,fg,gh,hi,ij,jk,kl,lm,mn,no,op,pq,qr= map(lambda v: (v[1], v[2]-v[1], v[1]-v[0]),zip(*numpy.percentile(flatchain, [16, 50, 84],axis=0)))
@@ -65,16 +68,18 @@ from plotting_everything import mc_plotter_spread,dist_plotter
 
 ## Can't remember what this does - probably not important
 import pylab
-pylab.figure(figsize=(18,10))
+pylab.figure(figsize=(30,15))
 legend_counter=0
 for x_ex in flatchain[numpy.random.randint(len(flatchain), size=100)]:
     #print (x_ex)
     #outputs=forward_model_old(x_ex[0],x_ex[1],x_ex[2],x_ex[3],x_ex[4],x_ex[5],x_ex[6],x_ex[7],x_ex[8],x_ex[9],x_ex[10],x_ex[11],x_ex[12],x_ex[13],x_ex[14],x_ex[15],x_ex[16])
     [outputs,imbalance] = forward_model(x_ex[8],x_ex[6],x_ex[9],x_ex[0],x_ex[1],0.45e12,x_ex[10],0.01,x_ex[2],x_ex[3],x_ex[4],x_ex[7],x_ex[14],x_ex[5],x_ex[11],x_ex[12],x_ex[15],x_ex[13],x_ex[16])
-    
+    if numpy.any(~numpy.isfinite(outputs)):
+        continue
     sp=((x_ex[6]+x_ex[4]*x_ex[6])/x_ex[6])**x_ex[15]  # sp = (1+V)**beta: spreading rate relative to modern
     mc_plotter_spread(outputs,"y",legend_counter,sp)
     legend_counter=legend_counter+1
+    print("RUN", legend_counter)
 
 ### This is important. This takes 1000 sets of parameter values from your posterior
 ### and re-runs the forward model 1000 times to get distributions for the time-evolution
@@ -85,15 +90,18 @@ spread_output=[]
 carbw_factor=[]
 sil_change=[]
 seafloor_change=[]
-for x_ex in flatchain[numpy.random.randint(len(flatchain), size=1000)]:
+for x_ex in flatchain[numpy.random.randint(len(flatchain), size=100)]: # default size=1000
     #print (x_ex)
     #outputs=forward_model_old(x_ex[0],x_ex[1],x_ex[2],x_ex[3],x_ex[4],x_ex[5],x_ex[6],x_ex[7],x_ex[8],x_ex[9],x_ex[10],x_ex[11],x_ex[12],x_ex[13],x_ex[14],x_ex[15],x_ex[16])
     [outputs,imbalance]= forward_model(x_ex[8],x_ex[6],x_ex[9],x_ex[0],x_ex[1],0.45e12,x_ex[10],0.01,x_ex[2],x_ex[3],x_ex[4],x_ex[7],x_ex[14],x_ex[5],x_ex[11],x_ex[12],x_ex[15],x_ex[13],x_ex[16])
+    if numpy.any(~numpy.isfinite(outputs)):
+        continue
     spread_output.append( ((x_ex[6]+x_ex[4]*x_ex[6])/x_ex[6])**x_ex[15])
     mega_output.append(outputs)
     carbw_factor.append((1+x_ex[5])*outputs[20][99]/outputs[20][0])
     sil_change.append(outputs[20][99]-outputs[20][0])
     seafloor_change.append(outputs[19][99]-outputs[19][0])
+    print("RUN", legend_counter)
 mega_output=numpy.array(mega_output)
 spread_output=numpy.array(spread_output)
 dist_plotter(mega_output,spread_output,"y")
@@ -139,8 +147,4 @@ pylab.hist2d(sil_change, seafloor_change, range=[[-1, 6], [-1, 6]],bins=30,densi
 pylab.colorbar(label='Probability density')
 pylab.xlabel('Decrease in continental silicate weathering\nsince mid Cretaceous (Tmol/yr)')
 pylab.ylabel('Decrease in seafloor weathering\nsince mid Cretaceous (Tmol/yr)')
-
-print(">>> about to show()")
-pl.show(block=True)  # ここを追加してみる
-print(">>> after show()")
-#pylab.show()
+pylab.show()
