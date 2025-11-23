@@ -18,36 +18,52 @@ import scipy.stats
 ################################################################################
 # CO2 dependence of continental weathering
 [CO2_dep_low,CO2_dep_high]=[0.2,0.5]
+
 # e-folding temperature continental weathering (K)
 [Te_low,Te_high]=[5.,15.] # [30.,40.] to reproduce Fig. 3 and 4.
+
 #Relative Cretaceous weatherability
 [W_plus_1_low,W_plus_1_high]=[1.0,1.0] #[0.4,0.6] to reproduce Fig. 4
+
 #Climate sensitivity (K per CO2 doubling)
 [cl_sens_low,cl_sens_high]=[1.5,8.0] 
+
 # Change in outgassing, V
 [out_low,out_high]=[0.2,1.5]
+
 #Carbonate weatherability factor
 [C_WF_low,C_WF_high]=[-0.9,1.5]
+
 #Modern outgassing flux (mol C/yr)
-[F_outgass_low,F_outgass_high]=[4e12,10e12]
+[F_outgass_low,F_outgass_high]=[4e12,10e12
+                                ]
 #Modern carbonate weathering flux (mol/yr)
 [F_carbw_low,F_carbw_high]=[7e12,14e12]
+
 #Pore space circulation time (yr)
 [Tau_low,Tau_high]=[2e4,1e6]
+
 #Carbonate precipiataion exponent
 [n_low,n_high]=[1.0,2.5]
+
 #Modern seafloor dissolution relative to precipitation
 [alt_frac_low,alt_frac_high]=[0.5,1.5]
+
 #Surface-deep temperature gradient, a_grad
 [deep_grad_low,deep_grad_high]=[0.8,1.4]
+
 #pH dependence seafloor dissolution, gamma 
 [coef_for_diss_low,coef_for_diss_high]=[0,0.5]
+
 #Temperature dependence seafloor weathering (J/mol)
 [Ebas_low,Ebas_high]=[40000,110000]
+
 #Modern pelagic fraction
 [frac_pel_low,frac_pel_high]=[0.4,0.6]
+
 #Spreading rate dependence
 [beta_low,beta_high]=[0.0,1.0]
+
 #Paleogeography climate parameter (K)
 [PG_low,PG_high]=[0,5.0]
 

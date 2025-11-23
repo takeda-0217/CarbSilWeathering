@@ -68,7 +68,7 @@ def LnLike(x):
   #if (x[0] > 1.0 ) or (x[0]<0.01): # alternative exponent for plant modified weathering 
   #if (x[0] > 0.045 ) or (x[0]<0.025): # alternative exponent for runoff parameterization
     return -numpy.inf    ## likelihood is -infinity if parameter is outside prior range
-  if (x[1] > 50 ) or (x[1]<5): #Te parameter (K)
+  if (x[1] > 50 ) or (x[1]<5): #Te parameter (K) (e-folding temperature of continental weathering)
     return -numpy.inf    
   if (x[2] > 1.2 ) or (x[2] < 0.2): # This is the weatherability parameter, W+1 (so W: -0.8 to 1.2)
     return -numpy.inf 
@@ -158,13 +158,16 @@ ndim = 17 ### This is the number of parameters we are solving for (x[0], x[1], .
 ### nwalk * nsteps = total number of model runs
 ### To do a full model run, nwalk = 1000 and nsteps = 10000 is appropriate 
 ### For a quick run, nwalk = 100 and nsteps = 1000 will tell you if the code is working.
+nwalk  = 1000
+nsteps = 10000
 # nwalk  = 500 
 # nsteps = 2000
 # nwalk = 200
 # nsteps = 500
 ### --- quick test run values --- ###
-nwalk  = 50
-nsteps = 500
+#nwalk  = 50
+#nsteps = 500
+
 ### Important: if you make nsteps < 1000, you will need to modify some of the plotting stuff below
 ### This is because, ideally, you want to throw out the first 1000 steps, as it takes a while for the Markov
 ### chains to converge on the posteriors. But if you are just doing a quick test run to see if the code works
@@ -205,7 +208,7 @@ p0 = numpy.vstack([[0.2+0.3*numpy.random.random() for i in range(nwalk)], #Defau
                                 #pool = emcee.interruptible_pool.InterruptiblePool()) #for parallel
 # pos, lnprob, rstate=sampler.run_mcmc(p0, nsteps)
 ### --- For emcee version 3 --- ###
-n_cores = 5
+n_cores = 10
 print(f"Using {n_cores} processes for emcee")
 
 with Pool(processes=n_cores) as pool:
@@ -244,8 +247,8 @@ try:
         tau = sampler.get_autocorr_time()  # emcee 3
     except AttributeError:
         tau = sampler.acor                 # emcee 2 (old type)
-
-    print("ESS", nsteps * nwalk / numpy.nanmax(tau))
+    print("Autocorrelation time:", tau)
+    print("ESS", nsteps * nwalk / numpy.nanmax(tau)) # Effective Sample Size = Total sample size / autocorrelation time
 except Exception as e:
     print("couldn't calculate autocorrelation:", e)
 
@@ -257,10 +260,10 @@ lnprob = numpy.load('newln2.npy')
 # Plot a few individual chains
 fig, ax = pl.subplots(4) 
 for n in range(nwalk):
-  ax[0].plot(chain[n,:,0])
-  ax[1].plot(chain[n,:,1])
-  ax[2].plot(chain[n,:,2]) 
-  ax[3].plot(chain[n,:,3]) 
+  ax[0].plot(chain[n,:,0])  # CO2 dependence alpha
+  ax[1].plot(chain[n,:,1])  # e-folding temperature of cont. weathering Te
+  ax[2].plot(chain[n,:,2])  # Weatherability factor W
+  ax[3].plot(chain[n,:,3])  # Climate sensitivity parameter delata_T2x
 
 # find highest likelihood run
 logprob=numpy.array(lnprob)
@@ -270,8 +273,8 @@ print ("indeces for best",ii,jj)
 print ("loglikelihood and values",logprob[ii,jj],values[ii,jj,:])
 
 # Plot the corner plot, discarding the first 1000 steps as burn-in
-# production = chain[:,1000:,:]
-production = chain[:,0:,:] ## Use this if you have <1000 steps
+production = chain[:,1000:,:]
+# production = chain[:,0:,:] ## Use this if you have <1000 steps
 
 s         = production.shape                      # 3D array (nwalkers, nsteps_after_burn_in, ndim)
 flatchain = production.reshape(s[0] * s[1], s[2]) # convert to 2D array for corner plot
@@ -281,10 +284,10 @@ flatchain2=numpy.copy(flatchain)
 flatchain2[:,4]=flatchain2[:,4]+1           # make outgassing relative Cretaceous outgassing, V+1
 ## Weatherability is already Cretaceous weatherability, W+1, assuming w=1+W with plus sign
 flatchain2[:,5]=flatchain2[:,5]+1           # Carbonate weathering modifier
-flatchain2[:,8]=flatchain2[:,8]/1000.0      # Convert to ky
-flatchain2[:,13]=flatchain2[:,13]/1000.0    # Convert to kJ/mol
-flatchain2[:,6]=flatchain2[:,6]/1e12        # Convert to Tmol
-flatchain2[:,7]=flatchain2[:,7]/1e12        # Convert to Tmol
+flatchain2[:,8]=flatchain2[:,8]/1000.0      # Convert to ky: Mixing time for pore-space
+flatchain2[:,13]=flatchain2[:,13]/1000.0    # Convert to kJ/mol: activation energy seafloor weathering
+flatchain2[:,6]=flatchain2[:,6]/1e12        # Convert to Tmol: modern outgassing
+flatchain2[:,7]=flatchain2[:,7]/1e12        # Convert to Tmol: modern carbonate weathering
 
 from matplotlib import rc
 ## Plot posteriors as corner plots (compare to Fig. 6 in the paper)
@@ -303,7 +306,7 @@ from plotting_everything import mc_plotter_spread,dist_plotter
 
 ## Can't remember what this does - probably not important
 import pylab
-pylab.figure(figsize=(30,15))
+pylab.figure(figsize=(18,10))
 legend_counter=0
 for x_ex in flatchain[numpy.random.randint(len(flatchain), size=100)]:
     #print (x_ex)
